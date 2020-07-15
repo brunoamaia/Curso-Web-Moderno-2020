@@ -1,8 +1,15 @@
 const express = require('express')  // quando está na pasta "node_modules", não é necessário colocar o endereço
-const app = express()
+const app = express()               // Passa todas as funções do express para a constante "app"
+
+const bodyParser = require('body-parser')   // Trabalhar com o body das requisições
 
 const saudacao = require('./saudacaoMid')   // Como foi exportado dentro do index, pode importar pelo "require"
 
+
+
+app.use(bodyParser.text())  // pega apenas texto
+app.use(bodyParser.json())  // Pega apenas json
+app.use(bodyParser.urlencoded({extended: true}))    // Pega dados de formulário
 app.use(saudacao('Jão'))    // Usando/chamando uma função Midlleware
 
 // Pode ter apenas uma saida (resposta) em cada "chamada"
@@ -26,6 +33,7 @@ app.get('/clientes/relatorio', (req, res) => {
 // Tem que passar parametros pelo navegador 
 // pode ser text, xml, json, ...
 app.post('/corpo', (req, res) => {
+    /*  //  Pegar o "body manualmente"
     let corpo = ''
     req.on('data', function(parte) {
         corpo += parte
@@ -33,7 +41,10 @@ app.post('/corpo', (req, res) => {
 
     req.on('end', function(){
         res.send(corpo)
-    })
+    })*/
+
+    // Pegar o body pela extensão
+    res.send(req.body)
 })
 
 // Pegar informação pela URL (no caso, o parametro passado depois de "/clientes/", será chamado de "id" [:id])
