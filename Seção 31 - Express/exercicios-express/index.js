@@ -4,7 +4,12 @@ const app = express()               // Passa todas as funções do express para 
 const bodyParser = require('body-parser')   // Trabalhar com o body das requisições
 
 const saudacao = require('./saudacaoMid')   // Como foi exportado dentro do index, pode importar pelo "require"
-const usuarioApi = require('./api/usuario') // importar os módulos
+const usuarioApi = require('./api/usuario') // forma padrão de importar os módulos
+require('./api/produto') (app, 'Chamar passando parametro!') // Outra forma de importar módulos
+// Outro modo de importar e passar parametros
+/*const produtoApi = require('./api/produto')
+produtoApi(app, 'Passar parametro!') */
+
 
 
 
