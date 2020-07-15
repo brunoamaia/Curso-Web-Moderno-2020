@@ -23,6 +23,19 @@ app.get('/clientes/relatorio', (req, res) => {
     res.send(`Cliente relatório: completo ${req.query.completo}, ano = ${req.query.ano}`)
 })
 
+// Tem que passar parametros pelo navegador 
+// pode ser text, xml, json, ...
+app.post('/corpo', (req, res) => {
+    let corpo = ''
+    req.on('data', function(parte) {
+        corpo += parte
+    })
+
+    req.on('end', function(){
+        res.send(corpo)
+    })
+})
+
 // Pegar informação pela URL (no caso, o parametro passado depois de "/clientes/", será chamado de "id" [:id])
 app.get('/clientes/:id', (req, res) => {
     res.send(`Cliente ${req.params.id} selecionado!`)
