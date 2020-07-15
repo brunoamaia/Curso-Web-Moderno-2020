@@ -8,6 +8,11 @@ const app = express()
 })*/
 
 app.use('/hwe', (req, res) => {     // Subdominio especifico
+    res.json({
+        name: 'Tablet 32Gb',
+        price: 1899.00,
+        discount: 0.12
+    })
     res.send('Página hwe 🤖')
 })
 
