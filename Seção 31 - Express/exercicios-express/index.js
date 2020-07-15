@@ -4,13 +4,19 @@ const app = express()               // Passa todas as funções do express para 
 const bodyParser = require('body-parser')   // Trabalhar com o body das requisições
 
 const saudacao = require('./saudacaoMid')   // Como foi exportado dentro do index, pode importar pelo "require"
+const usuarioApi = require('./api/usuario') // importar os módulos
 
 
 
 app.use(bodyParser.text())  // pega apenas texto
 app.use(bodyParser.json())  // Pega apenas json
 app.use(bodyParser.urlencoded({extended: true}))    // Pega dados de formulário
+
 app.use(saudacao('Jão'))    // Usando/chamando uma função Midlleware
+
+app.post('/usuario', usuarioApi.salvar)
+app.get('/usuario', usuarioApi.obter)
+
 
 // Pode ter apenas uma saida (resposta) em cada "chamada"
 
