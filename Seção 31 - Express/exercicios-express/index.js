@@ -1,5 +1,9 @@
-const express = require('express')
+const express = require('express')  // quando está na pasta "node_modules", não é necessário colocar o endereço
 const app = express()
+
+const saudacao = require('./saudacaoMid')   // Como foi exportado dentro do index, pode importar pelo "require"
+
+app.use(saudacao('Jão'))    // Usando/chamando uma função Midlleware
 
 // Pode ter apenas uma saida (resposta) em cada "chamada"
 
