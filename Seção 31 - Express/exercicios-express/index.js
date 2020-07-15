@@ -8,11 +8,16 @@ const app = express()
 })*/
 
 app.use('/hwe', (req, res) => {     // Subdominio especifico
-    res.json({
+    res.json([
+        {id: 7, name: 'Ana', position: 1},
+        {id: 34, name: 'Bia', position: 2},
+        {id: 73, name: 'Carlos', position: 3}
+    ])
+    /*res.json({
         name: 'Tablet 32Gb',
         price: 1899.00,
         discount: 0.12
-    })
+    })*/
     res.send('Página hwe 🤖')
 })
 
