@@ -8,12 +8,28 @@ const app = express()
 })*/
 
 app.use('/hwe', (req, res) => {     // Subdominio especifico
+    // Enviar mais dados
+    res.json({
+        data:[
+            {id: 7, name: 'Ana', position: 1},
+            { id: 34, name: 'Bia', position: 2 },
+            { id: 73, name: 'Carlos', position: 3}
+        ],
+        count: 30,
+        skip: 0,
+        limit: 3,
+        status: 200
+    })
+
+    /*  // Enviar array de objetos e jsom
     res.json([
         {id: 7, name: 'Ana', position: 1},
         {id: 34, name: 'Bia', position: 2},
         {id: 73, name: 'Carlos', position: 3}
-    ])
-    /*res.json({
+    ])*/
+
+    /* //   Enviar Objeto
+    res.json({
         name: 'Tablet 32Gb',
         price: 1899.00,
         discount: 0.12
