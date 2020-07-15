@@ -9,10 +9,23 @@ app.use(saudacao('Jão'))    // Usando/chamando uma função Midlleware
 
 // Ele para na primeira "chamada" q for aceito
 // Se a primeira for a mais genérica (igual a abaixo), nunca acesssará as demais
-app.use((req, res, next) => {     //Toda vez que qualquer subdominio é acessado, ele vai ser chamado. Independentemente do método/requisição utilizado
+//Toda vez que qualquer subdominio é acessado, ele vai ser chamado. Independentemente do método/requisição utilizado
+app.use((req, res, next) => {
     //res.send('Acessou!!!')
     console.log('Entrou no domínio');
     next()
+})
+
+// Requisições do tipo "GET" passam parametros pela URL
+// Requisições do tipo "POST" são passados no corpo da requisição
+// URL => [localhost:3000/clientes/relatorio?completo=true&ano=2020]
+app.get('/clientes/relatorio', (req, res) => {
+    res.send(`Cliente relatório: completo ${req.query.completo}, ano = ${req.query.ano}`)
+})
+
+// Pegar informação pela URL (no caso, o parametro passado depois de "/clientes/", será chamado de "id" [:id])
+app.get('/clientes/:id', (req, res) => {
+    res.send(`Cliente ${req.params.id} selecionado!`)
 })
 
 // Quando se tem mais que uma chamada para o mesmo endereço
