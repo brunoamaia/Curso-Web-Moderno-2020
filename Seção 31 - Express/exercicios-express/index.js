@@ -1,11 +1,22 @@
 const express = require('express')
 const app = express()
 
+// Pode ter apenas uma saida (resposta) em cada "chamada"
+
 // Ele para na primeira "chamada" q for aceito
 // Se a primeira for a mais genérica (igual a abaixo), nunca acesssará as demais
-/*app.use((req, res) => {     //Toda vez que qualquer subdominio é acessado, ele vai ser chamado. Independentemente do método/requisição utilizado
-    res.send('Acessou!!!')
-})*/
+app.use((req, res, next) => {     //Toda vez que qualquer subdominio é acessado, ele vai ser chamado. Independentemente do método/requisição utilizado
+    //res.send('Acessou!!!')
+    console.log('Entrou no domínio');
+    next()
+})
+
+// Quando se tem mais que uma chamada para o mesmo endereço
+// Poedemos utilizar o "next()", que fará com que chame a próxima instrução 
+app.use('/hwe', (req, res, next) => {
+    console.log('Acessou a primeira parte!!')
+    next()
+})
 
 app.use('/hwe', (req, res) => {     // Subdominio especifico
     // Enviar mais dados
@@ -20,6 +31,7 @@ app.use('/hwe', (req, res) => {     // Subdominio especifico
         limit: 3,
         status: 200
     })
+    console.log('Módulo principal...')
 
     /*  // Enviar array de objetos e jsom
     res.json([
@@ -34,7 +46,7 @@ app.use('/hwe', (req, res) => {     // Subdominio especifico
         price: 1899.00,
         discount: 0.12
     })*/
-    res.send('Página hwe 🤖')
+    //res.send('Página hwe 🤖')
 })
 
 app.get('/get', (req, res) => {             // Requisição do tipo get
