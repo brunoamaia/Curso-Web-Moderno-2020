@@ -3,6 +3,8 @@ const consign = require('consign')  // O consign "injeta" o "app" nos middleware
 
 consign()
     .then('./config/middlewares.js')
+    .then('./api')
+    .then('./config/routes.js')
     .into(app)  // Injeta o "app" como parametro em cada uma das dependencias que ele carregar
 
 app.listen(3000, () => {
