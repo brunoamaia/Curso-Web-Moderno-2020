@@ -5,8 +5,8 @@ consign()
     .then('./config/middlewares.js')
     .then('./api')
     .then('./config/routes.js')
-    .into(app)  // Injeta o "app" como parametro em cada uma das dependencias que ele carregar
+    .into(app)  // Injeta o "app" como parametro em cada uma das dependencias dos arquivos informados
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log('Backend executando ...')
 })
