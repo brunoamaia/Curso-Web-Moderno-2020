@@ -58,7 +58,7 @@ module.exports = app => {
         }
     }
 
-    // obter todos os usuários
+    // Obter todos os usuários
     const get = (req, res) => { 
         app.db('users')
             .select('id', 'name', 'email', 'admin')
@@ -66,5 +66,17 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-    return { save, get }
+    // Obter usuário pelo ID
+    const getById = (req, res) => {
+        
+        app.db('users')
+            .select('id', 'name', 'email', 'admin')
+            .where({ id: req.params.id})   // Verifica se já existe o id eviado como parametro
+            .first()
+            .then(user => res.json(user))
+            .catch(err => res.status(500).send(err));
+        
+    }
+
+    return { save, get, getById }
 }

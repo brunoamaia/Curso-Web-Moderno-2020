@@ -6,4 +6,5 @@ module.exports = app => {
 
     app.route('/users/:id')
         .put(app.api.user.save)     // Atualizar informações do usuário
+        .get(app.api.user.getById)  // Selecionar usuário por ID
 }
