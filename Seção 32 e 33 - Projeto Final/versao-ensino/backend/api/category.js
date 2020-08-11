@@ -59,7 +59,7 @@ module.exports = app => {
 
     // Buscar categorias "Pai"
     const getParent = (categories, parentId) => {
-      let parent= categories.filter(parent.id === parentId)
+      const parent= categories.filter(parent => parent.id === parentId)
       return parent.length ? parent[0] : null
     }
 
@@ -100,5 +100,6 @@ module.exports = app => {
       .then(category => res.json(category))
       .catch(err => res.status(500).send(err))
   }
-  
+
+  return{ get, getById, remove, save }
 }
