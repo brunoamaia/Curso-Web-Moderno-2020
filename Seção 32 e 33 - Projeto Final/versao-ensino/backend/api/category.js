@@ -85,4 +85,12 @@ module.exports = app => {
     return categoriesWithPath
   }
 
+  // Buscar/retornar as categorias
+  const get = (req, res) => {
+
+    app.db('categories')
+      .then(categories => res.json(withPAth(categories)))
+      .catch(err => res.status(500).send(err))
+  }
+
 }
