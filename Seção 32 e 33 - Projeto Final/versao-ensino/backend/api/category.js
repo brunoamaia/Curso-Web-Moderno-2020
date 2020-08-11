@@ -54,5 +54,35 @@ module.exports = app => {
     }
   }
 
-  
+  // Criar a lista (camimnho) das categorias
+  const withPAth = categories => {
+
+    // Buscar categorias "Pai"
+    const getParent = (categories, parentId) => {
+      let parent= categories.filter(parent.id === parentId)
+      return parent.length ? parent[0] : null
+    }
+
+    // Monta os caminhos
+    const categoriesWithPath = categories.map(category => {
+      let path = category.name
+      let parent = getParent(categories, category.parentId)
+
+      while(parent) {   // Recursividade para buscar os "pais"
+        path = `${parent.name} > ${path}`
+        parent = getParent(categories, parent.parentId)
+      }
+      return { ...category, path }
+    })
+
+    // Ordenar as categorias 
+    categoriesWithPath.sort((a, b) => {
+      if (a.path < b.path) return -1
+      if (a.path > b.path) return 1
+      return 0
+    })
+
+    return categoriesWithPath
+  }
+
 }
