@@ -56,7 +56,6 @@ module.exports = app => {
 
   // Criar a lista (camimnho) das categorias
   const withPAth = categories => {
-
     // Buscar categorias "Pai"
     const getParent = (categories, parentId) => {
       const parent= categories.filter(parent => parent.id === parentId)
@@ -95,7 +94,7 @@ module.exports = app => {
   // Obter categoria pelo ID
   const getById = (req, res) => {
     app.db('categories')
-      where({ id: req.params.id})
+      .where({ id: req.params.id})
       .first()
       .then(category => res.json(category))
       .catch(err => res.status(500).send(err))
