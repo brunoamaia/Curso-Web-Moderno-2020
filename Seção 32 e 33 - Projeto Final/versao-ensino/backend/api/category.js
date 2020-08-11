@@ -87,10 +87,18 @@ module.exports = app => {
 
   // Buscar/retornar as categorias
   const get = (req, res) => {
-
     app.db('categories')
       .then(categories => res.json(withPAth(categories)))
       .catch(err => res.status(500).send(err))
   }
 
+  // Obter categoria pelo ID
+  const getById = (req, res) => {
+    app.db('categories')
+      where({ id: req.params.id})
+      .first()
+      .then(category => res.json(category))
+      .catch(err => res.status(500).send(err))
+  }
+  
 }
