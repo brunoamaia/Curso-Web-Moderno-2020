@@ -17,9 +17,6 @@ module.exports = app => {
         const user = { ...req.body }
         if (req.params.id) user.id = req.params.id
         
-        console.log('#*#*#*#*#*#*#*#*#*#**#*#*#*#*#*#*#*#*#');
-        console.log(user);
-
         try {
             existOrError(user.name, 'Nome não informado')
             existOrError(user.email, 'E-mail não informado')
@@ -37,8 +34,6 @@ module.exports = app => {
         } catch (msg) {
             return res.status(400).send(msg)
         }
-
-        console.log('Não deu erro!');
 
         // Se não deu erro, vamos criptografar a senha
         user.password = encryptPassword(user.password)
