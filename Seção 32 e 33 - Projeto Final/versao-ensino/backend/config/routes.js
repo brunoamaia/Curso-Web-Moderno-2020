@@ -12,7 +12,7 @@ module.exports = app => {
 		.get(app.api.category.get)		// Listar todas as categorias 
 		.post(app.api.category.save)	// Inserir categoria 
 
-  app.route('/categories/:id')
+	app.route('/categories/:id')
 		.delete(app.api.category.remove)  // Deletar usuário por ID
 		.get(app.api.category.getById)    // Selecionar usuário por ID
 		.put(app.api.category.save)       // Atualizar informações do usuário

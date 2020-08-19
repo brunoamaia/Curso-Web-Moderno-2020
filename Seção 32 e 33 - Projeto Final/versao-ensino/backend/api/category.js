@@ -100,5 +100,21 @@ module.exports = app => {
       .catch(err => res.status(500).send(err))
   }
 
+  // Cria a árvore das categorias
+  const toTree = (categories, tree) => {
+    // Se tree for nulo, vai filtrar as categorias que não possuem parentId (categorias "Pai")
+    if (!tree) tree = categories.filter(c => !c.parentId)
+
+    // Vai buscar os filhos de cada categoria "pai"
+    tree = tree.map(parentNode => {
+      const isChild = node => node.parentId == parentNode.id
+      parentNode.children = toTree(categories, categories.filter(isChild))
+      return parentNode
+    })
+
+    return tree
+  }
+
+
   return{ get, getById, remove, save }
 }
