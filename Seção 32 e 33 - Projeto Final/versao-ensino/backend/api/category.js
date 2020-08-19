@@ -115,6 +115,12 @@ module.exports = app => {
     return tree
   }
 
+  // Serviço que mapeia os dados quando envia o navegador mando get  o.O
+  const getTree = (req, res) => {
+    app.db('categories')
+      .then(categories => res.json(toTree(withPAth(categories))))   // Passa as ctegorias para pegar o Path e o resultado é utilizado para gerar a árvore...
+      .catch(err => res.status(500).send(err))
+  }
 
-  return{ get, getById, remove, save }
+  return{ get, getById, getTree, remove, save }
 }
