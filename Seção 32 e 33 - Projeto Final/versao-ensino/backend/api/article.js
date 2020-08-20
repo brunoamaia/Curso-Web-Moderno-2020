@@ -1,6 +1,6 @@
 module.exports = app => {
 	// Chamar os validadores
-	const { existOrError, notExistOrError } = app.api.validation
+	const { existOrError } = app.api.validation
 
   const save = (req, res) => {
     const article = { ...req.body }
@@ -13,17 +13,18 @@ module.exports = app => {
       existOrError(article.userId, 'Autor não informado')
       existOrError(article.content, 'Conteúdo não informado')
     } catch(msg) {
-      res.status(400).send(msg)
+      return res.status(400).send(msg)
     }
     
     if(article.id) {
+      console.log(`\n\n\n\nartigo atualizado:`);
       app.db('articles')
         .update(article)
         .where({ id: article.id })
-        .then(_ =>  res.status(204).send())
+        .then(_ => res.status(204).send())
         .catch(err => res.status(500).send(err))
     } else {
-      console.log('artigo novo:');
+      console.log(`\n\n\n\nartigo novo:`);
       console.log(article);
       app.db('articles')
         .insert(article)
@@ -37,7 +38,12 @@ module.exports = app => {
     try {
       const rowsDeleted = await app.db('articles')
         .where({ id: req.params.id }).del()
-      notExistOrError(rowsDeleted, 'Artigo não foi encontrado.')
+      
+      try {
+        existOrError(rowsDeleted, 'Artigo não foi encontrado.')
+      } catch(msg) {
+        return res.status(400).send(msg)
+      }
 
       res.status(204).send()
     } catch(msg) {
