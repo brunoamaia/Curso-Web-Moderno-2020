@@ -17,15 +17,12 @@ module.exports = app => {
     }
     
     if(article.id) {
-      console.log(`\n\n\n\nartigo atualizado:`);
       app.db('articles')
         .update(article)
         .where({ id: article.id })
         .then(_ => res.status(204).send())
         .catch(err => res.status(500).send(err))
     } else {
-      console.log(`\n\n\n\nartigo novo:`);
-      console.log(article);
       app.db('articles')
         .insert(article)
         .then(_ => res.status(204).send())
