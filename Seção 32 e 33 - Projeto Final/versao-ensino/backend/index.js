@@ -6,6 +6,7 @@ const db = require('./config/db.js')   // Comunicação/configuração com o Ban
 app.db = db                         // "Injeta" as funcionalidades do "db" no comando app.db
 
 consign()
+    .include('./config/passport.js')    // Autenticação
     .then('./config/middlewares.js')    // Chama os midllewares (Trabalha com o JSON)
     .then('./api/validation.js')        // Métodos de validação dos dados que serão cadastrados
     .then('./api')                      // Lê todos os arquivos dentro da pasta (no caso, conversa com o BD)
