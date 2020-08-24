@@ -1,9 +1,12 @@
 const app = require('express')()    // Faz duas chamas consecutivas. O resultado da chamada do "express", será armazenado em  "app"
 const consign = require('consign')  // O consign "injeta" o "app" nos middlewares, tornando mais fácil administrar as dependencias
+const mongoose = require('mongoose')
 
 const db = require('./config/db.js')   // Comunicação/configuração com o Banco de Dados
-
 app.db = db                         // "Injeta" as funcionalidades do "db" no comando app.db
+
+require('./config/mongodb')
+app.mongoose = mongoose
 
 consign()
     .include('./config/passport.js')    // Autenticação
