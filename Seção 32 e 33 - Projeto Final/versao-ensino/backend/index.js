@@ -13,6 +13,7 @@ consign()
     .then('./config/middlewares.js')    // Chama os midllewares (Trabalha com o JSON)
     .then('./api/validation.js')        // Métodos de validação dos dados que serão cadastrados
     .then('./api')                      // Lê todos os arquivos dentro da pasta (no caso, conversa com o BD)
+    .then('./schedule')                 // Atualização programada dos dados do MongoDB
     .then('./config/routes.js')         // Vai ler as rotas após carregar todas as configurações (linhas anteriores)
     .into(app)  // Injeta o "app" como parametro em cada uma das dependencias dos arquivos informados
 
