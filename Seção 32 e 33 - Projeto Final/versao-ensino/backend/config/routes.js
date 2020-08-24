@@ -13,8 +13,9 @@ module.exports = app => {
 
   app.route('/users/:id')
 		.all(app.config.passport.authenticate())
-		.get(admin(app.api.user.getById))  // Selecionar usuário por ID
-		.put(admin(app.api.user.save))     // Atualizar informações do usuário
+		.get(admin(app.api.user.getById))  	// Selecionar usuário por ID
+		.put(admin(app.api.user.save))     	// Atualizar informações do usuário
+		.delete(admin(app.api.user.remove))	// Soft Delete
 
   app.route('/categories')
 		.all(app.config.passport.authenticate())
