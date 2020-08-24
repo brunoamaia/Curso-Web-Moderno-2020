@@ -16,6 +16,12 @@ module.exports = app => {
     const save = async (req, res) => {
         const user = { ...req.body }
         if (req.params.id) user.id = req.params.id
+
+        // Verificar se está sendo criado no local correto
+        if(!req.originalUrl.startsWith('/users')) user.admin = false
+        // Verifica se o usuário esá logado no sistema ou
+        // Se o quem está cadastrando tem o status de admin
+        if(!req.user || !req.user.admin) user.admin = false
         
         try {
             existOrError(user.name, 'Nome não informado')
