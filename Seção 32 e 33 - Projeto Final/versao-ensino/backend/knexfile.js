@@ -1,12 +1,9 @@
-// Update with your config settings.
+// Update with your settings.
+const { db } = require('./.env')  // informações de conexão com o BD
 
 module.exports = {
   client: 'postgresql',
-  connection: {
-    database: 'datawebproject',
-    user:     'postgres',
-    password: '123456'
-  },
+  connection: db,
   
   pool: {
     min: 2,
